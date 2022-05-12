@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+fieldset label {
+  display: flex;
+  flex-direction: column row;
+  align-items: center;
+}
+
+label {
+  padding: 8px;
+}
+
+label input {
+  margin: 5px;
+}
