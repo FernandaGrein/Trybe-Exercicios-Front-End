@@ -12,7 +12,7 @@ class NameInput extends React.Component {
             name="name"
             value={propName.toUpperCase()}
             onChange={propOnChange}
-            maxlength="40"
+            maxLength="40"
             required
           />
         </label>

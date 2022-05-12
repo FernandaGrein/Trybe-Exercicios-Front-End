@@ -12,7 +12,7 @@ class CpfInput extends React.Component {
             name="cpf"
             value={propCpf}
             onChange={ propOnChange }
-            maxlength="11"
+            maxLength="11"
             required
           />
         </label>

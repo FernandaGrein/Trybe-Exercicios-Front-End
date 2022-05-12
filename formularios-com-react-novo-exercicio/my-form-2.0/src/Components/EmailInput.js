@@ -12,7 +12,7 @@ class EmailInput extends React.Component {
             name = "name"
             value ={ propEmail }
             onChange ={ propOnChange }
-            maxlength="50"
+            maxLength="50"
             required 
             />
         </label>
