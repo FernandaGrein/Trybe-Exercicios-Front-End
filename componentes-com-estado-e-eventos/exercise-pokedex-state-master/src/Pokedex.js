@@ -12,13 +12,13 @@ class Pokedex extends React.Component {
         };
       }
     
-    //   filterPokemons(filteredType) {
-    //     this.setState({ filteredType, pokemonIndex: 0 });
-    //   }
+      filterPokemons(filteredType) {
+        this.setState({ filteredType, pokemonIndex: 0 });
+      }
       
     
       nextPokemon(numberOfPokemons) {
-          // numberOfPokemons é o tamanho do array de objetos com todos os pokemons
+          // numberOfPokemons é o tamanho do array filtrado de objetos com todos os pokemons
           //  numberOfPokemons = filteredPokemons.length
         this.setState(state => ({
           pokemonIndex: (state.pokemonIndex + 1) % numberOfPokemons,
@@ -35,23 +35,27 @@ class Pokedex extends React.Component {
         });
       }
     
-    //   fetchPokemonTypes() {
-    //     const { pokemons } = this.props;
+      fetchPokemonTypes() {
+        const { pokemons } = this.props;
     
-    //     return [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))];
-    //   }
+        return [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))];
+        // { types } é a descontrução de pokemons.type do data
+        // reduce cria um array só com os tipos dos pokemons 
+        // https://www.delftstack.com/pt/howto/javascript/javascript-remove-duplicates-from-an-array/
+        // ... new Set([array]) - remove os itens repetidos 
+      }
     
       render() {
         const filteredPokemons = this.fetchFilteredPokemons();
       //  console.log(filteredPokemons); = um array de objetos com todos os pokemons
-      //  const pokemonTypes = this.fetchPokemonTypes();
+        const pokemonTypes = this.fetchPokemonTypes();
         const pokemon = filteredPokemons[this.state.pokemonIndex];
     
         return (
           <div className="pokedex">
             <Pokemon pokemon={ pokemon } />
             <div className="pokedex-buttons-panel">
-              {/* <Button
+              <Button
                 onClick={() => this.filterPokemons('all')}
                 className="filter-button"
               >
@@ -65,7 +69,7 @@ class Pokedex extends React.Component {
                 >
                   { type }
                 </Button>
-              ))} */}
+              ))}
             </div>
             <Button
               className="pokedex-button"
