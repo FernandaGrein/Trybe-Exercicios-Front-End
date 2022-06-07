@@ -67,6 +67,42 @@ describe("Tela de inserção de email", () => {
   })
 });
 
+describe("aprendendo sobre testes em requisiçãode API", () => {
+  it("verifica se a piada é exibida na tela", async () => {
+    global.fetch = (url) => {
+      return Promise.resolve({
+        json: () => Promise.resolve({
+          id: '7h3oGtrOfxc',
+          joke: 'Whiteboards ... are remarkable.',
+          status: 200,
+         })
+      })
+    }
+    render(<App />)
+    const renderedJolke = await screen.findByText('Whiteboards ... are remarkable.');
+    expect(renderedJolke).toBeInTheDocument();
+  })
+
+  it('segunda forma de fazer, mais prática', async () => {
+    jest.spyOn(global, 'fetch');  // espiona as chamadas a função fetch
+    global.fetch = jest.fn().mockResolvedValue({  // é por meio do objeto global que conseguimos usar qualquer função
+      json: jest.fn().mockResolvedValue({  // é usando um mockResolvedValue para cada then
+        id: '7h3oGtrOfxc',
+        joke: 'Whiteboards ... are remarkable.',
+        status: 200,
+      })
+    })
+    render(<App />)
+    const renderedJolke = await screen.findByText('Whiteboards ... are remarkable.');
+    expect(renderedJolke).toBeInTheDocument();
+    expect(global.fetch).toBeCalledTimes(1);
+    expect(global.fetch).toBeCalledWith(
+      'https://icanhazdadjoke.com/',
+      { headers: { Accept: 'application/json' } },
+    );
+  })
+})
+
 
 // acessar os elementos 
 // interagir com os elementos (se for necessário)

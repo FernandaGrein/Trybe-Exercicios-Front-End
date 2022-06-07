@@ -7,7 +7,15 @@ class App extends Component {
     this.state = {
       email: '',
       saveEmail: '',
+      joke:'',
     };
+  }
+ 
+  componentDidMount() {
+  const url = 'https://icanhazdadjoke.com/';
+  fetch(url, { headers: { Accept: 'application/json' } })
+  .then((response) => response.json())
+  .then(({ joke }) => this.setState({ joke }));
   }
 
   changeEmail(value) {
@@ -19,7 +27,7 @@ class App extends Component {
   }
 
   render() {
-    const { email, saveEmail } = this.state;
+    const { email, saveEmail, joke } = this.state;
     return (
       <div className="App">
         <label htmlFor="id-email">
@@ -40,6 +48,9 @@ class App extends Component {
         />
         <input id="btn-id" type="button" value="Voltar" />
         <h2 data-testid="id-email-user">{`Valor: ${saveEmail}`}</h2>
+        <section>
+          { joke }
+        </section>
       </div>
     );
   }
